@@ -1516,6 +1516,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinForms", "WinForms", "{58
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TerraFX.Samples.WinForms", "samples\WinForms\TerraFX.Samples.WinForms.csproj", "{3261E57E-FE06-4EE2-A9BC-62D5B49732C8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "d3d9", "d3d9", "{AEF6F1AC-3DBE-4D7F-81E7-177697326B37}"
+	ProjectSection(SolutionItems) = preProject
+		generation\shared\d3d9\generate.rsp = generation\shared\d3d9\generate.rsp
+		generation\shared\d3d9\header.txt = generation\shared\d3d9\header.txt
+		generation\shared\d3d9\shared-d3d9.h = generation\shared\d3d9\shared-d3d9.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "d3d9caps", "d3d9caps", "{3BF2D764-3C0E-47A6-82A4-5919FC75D246}"
+	ProjectSection(SolutionItems) = preProject
+		generation\shared\d3d9caps\generate.rsp = generation\shared\d3d9caps\generate.rsp
+		generation\shared\d3d9caps\header.txt = generation\shared\d3d9caps\header.txt
+		generation\shared\d3d9caps\shared-d3d9caps.h = generation\shared\d3d9caps\shared-d3d9caps.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "d3d9types", "d3d9types", "{A33BF157-78E7-4C38-BA92-E94BC6A02F13}"
+	ProjectSection(SolutionItems) = preProject
+		generation\shared\d3d9types\generate.rsp = generation\shared\d3d9types\generate.rsp
+		generation\shared\d3d9types\header.txt = generation\shared\d3d9types\header.txt
+		generation\shared\d3d9types\shared-d3d9types.h = generation\shared\d3d9types\shared-d3d9types.h
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1760,6 +1781,9 @@ Global
 		{CBCCB0D7-2657-42CB-8819-0AD46B1C6346} = {67311E5E-FA9C-43A6-B431-9EF10047A0CE}
 		{5895C475-9016-4176-8BDB-C86FF8835230} = {1054E499-981F-4EFA-855B-EC6FA604C6FB}
 		{3261E57E-FE06-4EE2-A9BC-62D5B49732C8} = {5895C475-9016-4176-8BDB-C86FF8835230}
+		{AEF6F1AC-3DBE-4D7F-81E7-177697326B37} = {F9716DD9-2967-4295-AC71-F1FD5A9EEFEF}
+		{3BF2D764-3C0E-47A6-82A4-5919FC75D246} = {F9716DD9-2967-4295-AC71-F1FD5A9EEFEF}
+		{A33BF157-78E7-4C38-BA92-E94BC6A02F13} = {F9716DD9-2967-4295-AC71-F1FD5A9EEFEF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2FE36DF8-2D9C-4F20-8787-45DC74B57461}
