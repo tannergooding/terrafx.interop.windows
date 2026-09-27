@@ -17,7 +17,11 @@ jobs:
         os: [ windows ]
     steps:
     - uses: actions/checkout@v4
-    - run: ./scripts/cibuild.cmd -configuration ${{ matrix.configuration }} -architecture ${{ matrix.architecture }}
+    - if: ${{ matrix.configuration == 'debug' }}
+      run: ./scripts/cibuild.cmd -configuration ${{ matrix.configuration }} -architecture ${{ matrix.architecture }} -pack:$false
+      shell: cmd
+    - if: ${{ matrix.configuration == 'release' }}
+      run: ./scripts/cibuild.cmd -configuration ${{ matrix.configuration }} -architecture ${{ matrix.architecture }}
       shell: cmd
     - uses: actions/upload-artifact@v4
       with:
@@ -28,6 +32,7 @@ jobs:
           ./artifacts/tst/**/*
         if-no-files-found: error
     - uses: actions/upload-artifact@v4
+      if: ${{ matrix.configuration == 'release' }}
       with:
         name: ${{ matrix.os }}_${{ matrix.configuration }}_${{ matrix.architecture }}_pkg
         path: |
@@ -42,7 +47,7 @@ jobs:
         os: [ windows ]
     steps:
     - uses: actions/checkout@v4
-    - run: ./scripts/cibuild.cmd -configuration ${{ matrix.configuration }} -architecture ${{ matrix.architecture }}
+    - run: ./scripts/cibuild.cmd -configuration ${{ matrix.configuration }} -architecture ${{ matrix.architecture }} -fast
       shell: cmd
     - uses: actions/upload-artifact@v4
       with:

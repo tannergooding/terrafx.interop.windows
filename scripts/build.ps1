@@ -4,6 +4,7 @@ Param(
   [switch] $build,
   [switch] $ci,
   [ValidateSet("Debug", "Release")][string] $configuration = "Debug",
+  [switch] $fast,
   [switch] $generate,
   [switch] $help,
   [switch] $pack,
@@ -20,7 +21,13 @@ $ErrorActionPreference = "Stop"
 
 function Build() {
   $logFile = Join-Path -Path $LogDir -ChildPath "$configuration\build.binlog"
-  & dotnet build -c "$configuration" --no-restore -v "$verbosity" /p:Platform="Any CPU" /bl:"$logFile" /err $properties "$solution"
+  $fastBuildProperties = @()
+
+  if ($fast) {
+    $fastBuildProperties = @("/p:RunAnalyzers=false", "/p:GenerateDocumentationFile=false")
+  }
+
+  & dotnet build -c "$configuration" --no-restore -v "$verbosity" /p:Platform="Any CPU" /bl:"$logFile" /err $fastBuildProperties $properties "$solution"
 
   if ($LastExitCode -ne 0) {
     throw "'Build' failed for '$solution'"
@@ -53,6 +60,7 @@ function Help() {
     Write-Host -Object "Actions:"
     Write-Host -Object "  -restore                Restore dependencies"
     Write-Host -Object "  -build                  Build solution"
+    Write-Host -Object "  -fast                   Skip build analyzers and XML documentation; do not pack"
     Write-Host -Object "  -test                   Run all tests in the solution"
     Write-Host -Object "  -pack                   Package build artifacts"
     Write-Host -Object ""
@@ -104,9 +112,17 @@ try {
     exit 0
   }
 
+  if ($fast -and $pack) {
+    throw "'-fast' cannot be combined with '-pack': fast builds do not generate XML documentation"
+  }
+
   if ($ci) {
     $build = $true
-    $pack = $true
+
+    if (-not $PSBoundParameters.ContainsKey('pack')) {
+      $pack = -not $fast
+    }
+
     $restore = $true
     $test = $true
 

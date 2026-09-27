@@ -7,6 +7,7 @@ The following is a set of guidelines for contributing to TerraFX.
 * [Code of Conduct](#code-of-conduct)
 * [License](#license)
 * [What should I know?](#what-should-i-know)
+* [Building](#building)
 * [Pull Requests](#pull-requests)
 * [Issues](#issues)
 * [Questions](#questions)
@@ -27,6 +28,14 @@ Copyright © Tanner Gooding and Contributors. Licensed under the MIT License
 
 Most of the basics of the project, such as what it is about, and its goals are
 covered in our [README](README.md).
+
+### Building
+
+After `.\restore.cmd`, use `.\build.cmd -fast` for builds while iterating. This
+skips build-time analyzers and XML documentation generation; it does not skip
+compilation.
+Run `.\build.cmd` without `-fast` for full analysis and documentation before
+packaging. The `-fast` option cannot be combined with `-pack`.
 
 ### Pull Requests
 
